@@ -1,71 +1,25 @@
-//PhotoList.jsx
-
 import React from 'react';
 import PhotoListItem from './PhotoListItem';
+
 import '../styles/PhotoList.scss';
 
-const PhotoList = ({ photos }) => (
-  <div className="photo-list">
-    {
-      photos.map((photo, index) => <PhotoListItem key={index} {...photo} />)
-    }
-  </div>
-);
+const PhotoList = (props) => {
 
-PhotoList.defaultProps = {
-  photos: [
-    {
-      "id": "1",
-      "location": {
-        "city": "Montreal",
-        "country": "Canada"
-      },
-      "urls": {
-        "full": `${process.env.PUBLIC_URL}/Image-1-Full.jpeg`,
-        "regular": `${process.env.PUBLIC_URL}/Image-1-Regular.jpeg`
-      },
-      "user": {
-        "id": "1",
-        "username": "exampleuser",
-        "name": "Joe Example",
-        "profile": `${process.env.PUBLIC_URL}/profile-1.jpg`
-      }
-    },
-    {
-      "id": "2",
-      "location": {
-        "city": "Toronto",
-        "country": "Canada"
-      },
-      "urls": {
-        "full": `${process.env.PUBLIC_URL}/Image-2-Full.jpeg`,
-        "regular": `${process.env.PUBLIC_URL}/Image-2-Regular.jpeg`
-      },
-      "user": {
-        "id": "2",
-        "username": "exampleuser",
-        "name": "Joe Example",
-        "profile": `${process.env.PUBLIC_URL}/profile-1.jpg`
-      }
-    },
-    {
-      "id": "3",
-      "location": {
-        "city": "Ottawa",
-        "country": "Canada"
-      },
-      "urls": {
-        "full": `${process.env.PUBLIC_URL}/Image-3-Full.jpeg`,
-        "regular": `${process.env.PUBLIC_URL}/Image-3-Regular.jpeg`
-      },
-      "user": {
-        "id": "3",
-        "username": "exampleuser",
-        "name": "Joe Example",
-        "profile": `${process.env.PUBLIC_URL}/profile-1.jpg`
-      }
-    }
-  ]
-}
+  const photo = props.photoData.map((photo) => {
+    const liked = props.likedPhotoArray.includes(photo.id);
+    return <PhotoListItem key={photo.id} {...photo} photo={photo} liked={liked}
+      onClickLikes={props.onClickLikes}
+      onClickModal={props.onClickModal}
+      onLoadTopic={props.onLoadTopic} />;
+  });
 
-export default PhotoList
+  return (
+    <ul className="photo-list">
+      {photo}
+    </ul>
+  );
+
+};
+
+
+export default PhotoList;

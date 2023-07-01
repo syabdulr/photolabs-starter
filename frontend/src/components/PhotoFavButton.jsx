@@ -3,13 +3,19 @@ import React, { useCallback, useState } from 'react';
 import { FavIcon } from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-function PhotoFavButton() {
+function PhotoFavButton(props) {
+
+
+  const onClickHandler = function() {
+    props.onClickLikes(!props.liked, props.photoId);
+  };
+
   return (
-    <div className="photo-list__fav-icon">
-      <div className="photo-list__fav-icon-svg">
-        {/* Insert React */}
-      </div>
+
+    <div className='photo-list--fav-icon photo-list--fav-icon-svg' onClick={onClickHandler}>
+      <FavIcon fill={props.liked ? '#C80000' : '#EEEEEE'} />
     </div>
+
   );
 }
 
