@@ -1,14 +1,12 @@
 import React from 'react';
 
-import './TopicListItem.css';
+import '../styles/TopicListItem.scss';
 
 const TopicListItem = (props) => {
-  const { onLoadTopic, title, id } = props;
-
   return (
-    <div className="topic-list--item" onClick={() => { onLoadTopic(id); }}>
+    <div className="topic-list--item" onClick={() => { props.onLoadTopic(props.id); }}>
       <span>
-        {title}
+        {props.title}
       </span>
     </div>
   );

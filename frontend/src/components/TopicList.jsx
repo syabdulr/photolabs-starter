@@ -1,35 +1,20 @@
-//TopicList.jsx
-
 import React from 'react';
+
 import TopicListItem from './TopicListItem';
-import './TopicList.scss'; 
+import '../styles/TopicList.scss';
 
-const TopicList = ({ topics }) => (
-  <div className="top-nav-bar__topic-list">
-    {
-      topics.map((topic) => <TopicListItem key={topic.id} {...topic} />)
-    }
-  </div>
-);
+const TopicList = (props) => {
 
-TopicList.defaultProps = {
-  topics: [
-    {
-      "id": "1",
-      "slug": "topic-1",
-      "label": "Nature"
-    },  
-    {
-      "id": "2",
-      "slug": "topic-2",
-      "label": "Travel"
-    },
-    {
-      "id": "3",
-      "slug": "topic-3",
-      "label": "People"
-    },
-  ]
-}
+  const topic = props.topicData.map((topic) => {
+    return <TopicListItem key={topic.id} {...topic} onLoadTopic={props.onLoadTopic} />;
+  });
+
+  return (
+    <div className="top-nav-bar--topic-list">
+      {topic}
+    </div>
+  );
+
+};
 
 export default TopicList;

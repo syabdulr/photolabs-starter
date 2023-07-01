@@ -1,42 +1,20 @@
-//PhotoListItem.jsx
 
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/PhotoListItem.scss';
-import FavIcon from './FavIcon';
+import PhotoFavButton from './PhotoFavButton';
 
+//component to render single photo item
 const PhotoListItem = (props) => {
-  const { id, location, imageSource, username, profile } = props;
-
-  const [isFavorited, setIsFavorited] = useState(false);
-
-  const toggleFavorite = () => {
-    setIsFavorited(!isFavorited);
-  };
-  
   return (
-    <div key={id} className="photo-list__item">
-      <img className="photo-list__image" src={imageSource} alt={`Photo by ${username}`} />
-      <div className="photo-list__user-details">
-        <img className="photo-list__user-profile" src={profile} alt={`Profile of ${username}`} />
-        <h2 className="photo-list__user-info">{username}</h2>
-        <p className="photo-list__user-location">{location.city}, {location.country}</p>
-      </div>
-      <div onClick={toggleFavorite}>
-        <FavIcon isFavorited={isFavorited} />
+    <div className='photo-list--item' >
+      <PhotoFavButton photoId={props.id} onClickLikes={props.onClickLikes} liked={props.liked} />
+      <img className='photo-list--image' src={props.urls.regular} onClick={() => props.onClickModal(props.photo)} />
+      <div className='photo-list--user-details photo-list--user-info'>
+        <h3>{props.user.name}</h3>
       </div>
     </div>
   );
-}
+};
 
-PhotoListItem.defaultProps = {
-  "id": "1",
-  "location": {
-    "city": "Montreal",
-    "country": "Canada"
-  },
-  "imageSource": `${process.env.PUBLIC_URL}/Image-1-Regular.jpeg`,
-  "username": "Joe Example",
-  "profile": `${process.env.PUBLIC_URL}/profile-1.jpg`
-}
 
 export default PhotoListItem;
