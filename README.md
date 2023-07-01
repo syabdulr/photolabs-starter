@@ -32,3 +32,4 @@ npm start
 
 ## Final Product
 
+start populating readme with images
