@@ -2,6 +2,13 @@
 
 A Single Page Application in REACT for users to view images and like. The Images are separated by categories and can be filtered by category.
 
+## Final Product
+
+![Homepage](backend/screenshots/homepage.png)
+
+![Recommendations](backend/screenshots/recommendations.png)
+
+
 ## Setup
 
 Install dependencies with `npm install` in each respective `/frontend` and `/backend`.
@@ -30,6 +37,3 @@ cd backend
 npm start
 ```
 
-## Final Product
-
-start populating readme with images
