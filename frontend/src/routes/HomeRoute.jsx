@@ -7,12 +7,14 @@ import '../styles/HomeRoute.scss';
 const HomeRoute = (props) => {
   return (
     <div className="home-route">
+      {/* Top navigation bar */}
       <TopNavigationBar
         topicData={props.topicData}
         likedPhotoArray={props.likedPhotoArray}
         onLoadTopic={props.onLoadTopic}
       />
 
+      {/* List of photos */}
       <PhotoList
         photoData={props.photoData}
         onClickLikes={props.onClickLikes}

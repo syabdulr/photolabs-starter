@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import PhotoFavButton from '../components/PhotoFavButton';
 import '../styles/PhotoDetailsModal.scss';
 import PhotoList from '../components/PhotoList';
@@ -14,16 +13,18 @@ const PhotoDetailsModal = (props) => {
     onClickModal,
   } = props;
 
-  //liked variable to pass in likes information from homeroute
+  const [showFullImage, setShowFullImage] = useState(false);
+
+  // liked variable to pass in likes information from home route
   const liked = likedPhotoArray.includes(modalData.id);
+
+  const toggleImageSize = () => {
+    setShowFullImage(!showFullImage);
+  };
 
   return (
     <div className="photo-details-modal">
-      <button 
-        className="photo-details-modal--close-button" 
-        onClick={onClose} 
-        aria-label="Close the modal"
-      >
+      <button className="photo-details-modal--close-button" onClick={onClose}>
         <svg
           width="24"
           height="24"
@@ -46,7 +47,7 @@ const PhotoDetailsModal = (props) => {
             />
           </g>
           <defs>
-            <clipPath id="clip0_428_287"> 
+            <clipPath id="clip0_428_287">
               <rect width="18" height="18" fill="white" />
             </clipPath>
           </defs>
@@ -60,9 +61,10 @@ const PhotoDetailsModal = (props) => {
           liked={liked}
         />
         <img
-          className="photo-details-modal--image"
+          className={`photo-details-modal--image ${showFullImage ? 'full-image' : ''}`}
           src={modalData.urls.regular}
-          alt={`Photo by ${modalData.user.name}`}
+          alt={modalData.alt_description}
+          onClick={toggleImageSize}
         />
         <h2>{modalData.user.name}</h2>
         <hr className="photo-details-modal-line" />
