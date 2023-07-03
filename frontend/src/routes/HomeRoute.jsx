@@ -1,27 +1,28 @@
 import React from 'react';
-
 import TopNavigationBar from '../components/TopNavigationBar';
 import PhotoList from '../components/PhotoList';
 import '../styles/HomeRoute.scss';
 
-const HomeRoute = (props) => {
+
+const HomeRoute = function(props) {
+
+  const { photoFavourites, selectFavourite } = props;
+
   return (
     <div className="home-route">
-      {/* Top navigation bar */}
       <TopNavigationBar
-        topicData={props.topicData}
-        likedPhotoArray={props.likedPhotoArray}
-        onLoadTopic={props.onLoadTopic}
+        topics={props.topics}
+        photoFavourites={photoFavourites}
+        selectFavourite={selectFavourite}
+        handleTopicClick={props.handleTopicClick}
       />
-
-      {/* List of photos */}
       <PhotoList
-        photoData={props.photoData}
-        onClickLikes={props.onClickLikes}
-        onClickModal={props.onClickModal}
-        likedPhotoArray={props.likedPhotoArray}
-        onLoadTopic={props.onLoadTopic}
-      />
+        photos={props.photos}
+        topics={props.topics}
+        photoFavourites={photoFavourites}
+        selectFavourite={selectFavourite}
+        similarPhotos={props.photos.similar_photos}
+        openModal={props.openModal} />
     </div>
   );
 };

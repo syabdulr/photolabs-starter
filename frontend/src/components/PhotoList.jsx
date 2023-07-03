@@ -1,30 +1,47 @@
 import React from 'react';
 import PhotoListItem from './PhotoListItem';
-
 import '../styles/PhotoList.scss';
 
+
 const PhotoList = (props) => {
-  // Mapping over the photoData array to create PhotoListItem components
-  const photoItems = props.photoData.map((photo) => {
-    // Check if the current photo is in the likedPhotoArray
-    const liked = props.likedPhotoArray.includes(photo.id);
+  const { photos, topics, openModal, photoFavourites, selectFavourite } = props;
+
+  /**
+   * Handle the click event when a photo is clicked.
+   * @param {object} photo - The clicked photo object.
+   */
+  const handleClick = (photo) => {
+    openModal(photo);
+  };
+
+  /**
+   * Map the photos array to PhotoListItem components.
+   * @returns {Array<JSX.Element>} - An array of PhotoListItem components.
+   */
+  const mappedPhotos = photos.map((photo) => {
     return (
       <PhotoListItem
         key={photo.id}
-        {...photo}
-        photo={photo}
-        liked={liked}
-        onClickLikes={props.onClickLikes}
-        onClickModal={props.onClickModal}
-        onLoadTopic={props.onLoadTopic}
+        id={photo.id}
+        imageSource={photo.urls.regular}
+        username={photo.user.username}
+        userProfile={photo.user.profile}
+        userCity={photo.location.city}
+        userCountry={photo.location.country}
+        hideUserName={photo.hideUserName}
+        photoFavourites={photoFavourites}
+        selectFavourite={selectFavourite}
+        similarPhotos={photo.similar_photos}
+        topics={topics}
+        onClick={() => handleClick(photo)}
       />
     );
   });
 
   return (
     <ul className="photo-list">
-      {/* Rendered photo items */}
-      {photoItems}
+      {photos.length === 0 && <h2>Please wait while we load your photos</h2>}
+      {mappedPhotos}
     </ul>
   );
 };

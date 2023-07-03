@@ -1,20 +1,22 @@
-/* Styles for the favorite icon container */
 .photo-list--fav-icon {
+  display: flex;
   position: relative;
   top: 8px;
   right: -8px;
   cursor: pointer;
   margin-bottom: -30px;
   border-width: 0.1px;
-  background-color: #ffffff;
-  width: 35px;
-  height: 35px;
+  background-color: #EEEEEE;
+  width: 28px;
+  height: 32px;
   text-align: center;
-  border-radius: 100%;
+  border-radius: 50%;
+  align-items: center;
+  padding-left: 5px;
 }
 
-/* Styles for the favorite icon SVG */
+
 .photo-list--fav-icon-svg {
   position: relative;
-  top: 10px;
+  top: 2px;
 }

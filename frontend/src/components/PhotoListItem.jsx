@@ -1,23 +1,41 @@
-import React from 'react';
-import '../styles/PhotoListItem.scss';
-import PhotoFavButton from './PhotoFavButton';
+import React from 'react'; // Importing the React library
 
-// Component to render a single photo item
+import '../styles/PhotoListItem.scss'; // Importing the stylesheet for the component
+
+import PhotoFavButton from './PhotoFavButton'; // Importing the PhotoFavButton component
+
+// Defining the PhotoListItem component as a functional component
 const PhotoListItem = (props) => {
+
+  const { id, imageSource, username, userCity, userCountry, photoFavourites, selectFavourite, userProfile, onClick } = props; // Destructuring the props object
+
+  // Define the handleClick function to handle the click event on the photo item
+  const handleClick = (event) => {
+    onClick(event);
+  };
+
   return (
-    <div className='photo-list--item'>
-      {/* Favorite button */}
-      <PhotoFavButton photoId={props.id} onClickLikes={props.onClickLikes} liked={props.liked} />
-
-      {/* Photo image */}
-      <img className='photo-list--image' src={props.urls.regular} onClick={() => props.onClickModal(props.photo)} />
-
-      {/* User details */}
-      <div className='photo-list--user-details photo-list--user-info'>
-        <h3>{props.user.name}</h3>
+    <div className="photo-list--item" onClick={handleClick}>
+      <PhotoFavButton
+        id={id}
+        photoFavourites={photoFavourites}
+        selectFavourite={selectFavourite}
+      />
+      <div className="photo-list--image-container">
+        <img className="photo-list--image" src={imageSource} />
+        <div className="photo-list--user-details">
+          <img className="photo-list--user-profile" src={userProfile} />
+          <div className="photo-list--user-info">
+            {username}
+            <div className="photo-list--user-location">
+              {userCity}, {userCountry}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
+
 
 export default PhotoListItem;

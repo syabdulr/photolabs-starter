@@ -1,4 +1,3 @@
-/* Styles for the photo list item */
 .photo-list--item {
   margin: 24px;
   padding: 8px;
@@ -9,16 +8,22 @@
   max-width: fit-content;
 }
 
-/* Styles for the photo image */
 .photo-list--image {
+  border-radius: 8px 8px 0px 0px;
   user-select: none;
   width: 300px;
   height: 200px;
   object-fit: cover;
-  border-radius: 8px 8px 0px 0px;
 }
 
-/* Styles for the user profile image */
+.photo-list--image {
+  border-radius: 8px 8px 0px 0px;
+  user-select: none;
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
+
 .photo-list--user-profile {
   object-fit: cover;
   border-radius: 100%;
@@ -28,12 +33,10 @@
   height: 40px;
 }
 
-/* Styles for the user details container */
 .photo-list--user-details {
   display: flex;
 }
 
-/* Styles for the user info */
 .photo-list--user-info {
   margin-top: 5px;
   font-weight: 700;
@@ -41,7 +44,6 @@
   margin-left: 8px;
 }
 
-/* Styles for the user location */
 .photo-list--user-location {
   color: #838383;
 }

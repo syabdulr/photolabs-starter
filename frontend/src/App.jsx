@@ -1,53 +1,69 @@
-import React from 'react';
-
-// Custom hooks
-import useApplicationData from './hooks/useApplicationData';
-
-// Styles
-import './App.scss';
-
-// Components
+import React, { useEffect, useState } from 'react';
 import HomeRoute from './routes/HomeRoute';
 import PhotoDetailsModal from './routes/PhotoDetailsModal';
+import useApplicationData from './hooks/useApplicationData';
+import './App.scss';
 
 const App = () => {
-  // Destructuring values from the custom hook
-  // This hook handles state and functions related to application data
-  const {
-    photoData,
-    topicData,
-    likedPhotoArray,
-    displayModal,
-    modalData,
-    onClickLikes,
-    onClickModal,
-    setDisplayModal,
-    onLoadTopic,
-  } = useApplicationData();
+  const [photos, setPhotos] = useState([]);
+  const [topics, setTopics] = useState([]);
+  const { state, actions } = useApplicationData();
+  const { selectedPhoto, photoFavourites } = state;
+
+  const { openModal, closeModal, selectFavourite } = actions;
+
+  useEffect(() => {
+    const fetchPhotosAndTopics = async () => {
+      try {
+        
+        const photosResponse = await fetch('/api/photos');
+        const photosData = await photosResponse.json();
+        setPhotos(photosData);
+
+        const topicsResponse = await fetch('/api/topics');
+        const topicsData = await topicsResponse.json();
+        setTopics(topicsData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchPhotosAndTopics();
+  }, []);
+
+  const handleTopicClick = async (topicId) => {
+
+    try {
+      if (topicId) {
+        const response = await fetch(`http://localhost:8001/api/topics/photos/${topicId}`);
+        const data = await response.json();
+        setPhotos(data);
+      }
+    } catch (error) {
+      console.error('There was an error fetching the related photos', error);
+    }
+  };
 
   return (
     <div className="App">
-      {/* HomeRoute component displays the home page. It's supplied with various props for handling topics, photos, and interactions like clicking on a modal or like button */}
       <HomeRoute
-        topicData={topicData}
-        photoData={photoData}
-        onClickModal={onClickModal}
-        onClickLikes={onClickLikes}
-        likedPhotoArray={likedPhotoArray}
-        onLoadTopic={onLoadTopic}
+        photos={photos}
+        topics={topics}
+        openModal={openModal}
+        photoFavourites={photoFavourites}
+        selectFavourite={selectFavourite}
+        handleTopicClick={handleTopicClick}
       />
-
-      {/* PhotoDetailsModal is displayed when displayModal is true. It provides details of a particular photo and allows for user interactions like closing the modal or liking a photo */}
-      {displayModal && (
+      {selectedPhoto &&
         <PhotoDetailsModal
-          photoData={photoData}
-          onClose={() => setDisplayModal(false)}
-          modalData={modalData}
-          onClickModal={onClickModal}
-          onClickLikes={onClickLikes}
-          likedPhotoArray={likedPhotoArray}
-        />
-      )}
+          selectedPhoto={selectedPhoto}
+          selectFavourite={selectFavourite}
+          photoFavourites={photoFavourites}
+          closeModal={closeModal}
+          openModal={openModal}
+          photos={photos}
+          topics={topics}
+        />}
     </div>
   );
 };
