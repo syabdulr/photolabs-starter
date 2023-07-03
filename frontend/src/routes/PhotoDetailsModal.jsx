@@ -19,7 +19,11 @@ const PhotoDetailsModal = (props) => {
 
   return (
     <div className="photo-details-modal">
-      <button className="photo-details-modal--close-button" onClick={onClose}>
+      <button 
+        className="photo-details-modal--close-button" 
+        onClick={onClose} 
+        aria-label="Close the modal"
+      >
         <svg
           width="24"
           height="24"
@@ -58,6 +62,7 @@ const PhotoDetailsModal = (props) => {
         <img
           className="photo-details-modal--image"
           src={modalData.urls.regular}
+          alt={`Photo by ${modalData.user.name}`}
         />
         <h2>{modalData.user.name}</h2>
         <hr className="photo-details-modal-line" />
