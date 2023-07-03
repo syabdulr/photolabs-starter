@@ -6,6 +6,7 @@ import '../styles/FavBadge.scss';
 export const FavBadge = ({ likedPhotoArray }) => {
   return (
     <div className="fav-badge">
+      {/* Favorite icon */}
       <FavIcon
         width={20}
         height={17}
