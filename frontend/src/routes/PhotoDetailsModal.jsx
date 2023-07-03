@@ -46,7 +46,7 @@ const PhotoDetailsModal = (props) => {
             />
           </g>
           <defs>
-            <clipPath id="clip0_428_287">
+            <clipPath id="clip0_428_287"> 
               <rect width="18" height="18" fill="white" />
             </clipPath>
           </defs>
