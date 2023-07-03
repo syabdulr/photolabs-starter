@@ -2,13 +2,7 @@ import React from 'react';
 import { FavIcon } from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-
 function PhotoFavButton({ id, photoFavourites, selectFavourite }) {
-
-  /**
-   * Handle the click event when the like button is clicked.
-   * @param {object} event - The click event object.
-   */
   const handleLikeClick = (event) => {
     event.stopPropagation();
     selectFavourite(id);
@@ -20,11 +14,13 @@ function PhotoFavButton({ id, photoFavourites, selectFavourite }) {
     }
 
     return '#FF0000';
-  }
+  };
+
+  const fill = checkIfLiked(photoFavourites, id);
 
   return (
     <div className="photo-list--fav-icon" onClick={handleLikeClick}>
-      <FavIcon fill={checkIfLiked(photoFavourites, id)} />
+      <FavIcon fill={fill} />
     </div>
   );
 }

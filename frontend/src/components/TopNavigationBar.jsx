@@ -7,19 +7,20 @@ const TopNavigation = (props) => {
 
   const { topics, photos, photoFavourites, selectFavourite, handleTopicClick } = props;
 
-  //  Changes FavIcon in Nav Bar to indicate if there are liked photos
-
+  // Changes FavIcon in Nav Bar to indicate if there are liked photos
   const displayAlert = Object.values(photoFavourites).some((isFavourite) => isFavourite);
 
   return (
     <div className="top-nav-bar">
       <span className="top-nav-bar--logo">PhotoLabs</span>
 
-      <TopicList
-        topics={topics}
-        photos={photos}
-        handleTopicClick={handleTopicClick}
-      />
+      <div className="top-nav-bar--topics"> {/* New div for topics */}
+        <TopicList
+          topics={topics}
+          photos={photos}
+          handleTopicClick={handleTopicClick}
+        />
+      </div>
 
       <div className="top-nav-bar--favIcon">
         <FavIcon

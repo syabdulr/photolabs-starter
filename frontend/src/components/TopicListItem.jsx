@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/TopicListItem.scss'
+import '../styles/TopicListItem.scss';
 
 const TopicListItem = (props) => {
   const { id, label, link, handleTopicClick } = props;
@@ -10,18 +10,19 @@ const TopicListItem = (props) => {
   };
 
   return (
-    <div className="topic-list--item">
-      <a key={id} 
-      id={id} 
-      label={label} 
-      href={link} className="topic-list--item-link"
-      onClick={handleTopClick}>
+    <div className={`topic-list--item ${props.isActive ? 'active' : ''}`}>
+      <a
+        key={id}
+        id={id}
+        label={label}
+        href={link}
+        className="topic-list--item-link"
+        onClick={handleTopClick}
+      >
         <span>{label}</span>
       </a>
     </div>
   );
 };
 
-
 export default TopicListItem;
-

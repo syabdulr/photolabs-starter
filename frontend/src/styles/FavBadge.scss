@@ -1,24 +1,12 @@
 .fav-badge {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.fav-badge--count { 
-background-color: rgb(0, 0, 0);
-width: 20px;
-height: 20px;
-  border-radius: 99px;
-  position: absolute;
-  top: 0%;
-  right: 0%;
-  left: 70%;
-  bottom: 60%;
-
-  span {
-    text-align: center;
-    color: white;
-    width: 100%;
-    font-weight: 500;
-    position: absolute;
-    font-size: 16px;
-  }
+.fav-badge-label {
+  margin-left: 5px; /* Add a margin to separate the label from the icon */
+  white-space: nowrap; /* Prevent line wrapping */
+  text-align: left; /* Align the label to the left */
+  padding-left: 200px; /* Adjust the padding as needed to push the label further to the right */
 }

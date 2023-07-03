@@ -1,30 +1,25 @@
-import React from 'react'; // Importing the React library
+import React from 'react';
+import '../styles/PhotoListItem.scss';
+import PhotoFavButton from './PhotoFavButton';
+import FavBadge from './FavBadge';
 
-import '../styles/PhotoListItem.scss'; // Importing the stylesheet for the component
-
-import PhotoFavButton from './PhotoFavButton'; // Importing the PhotoFavButton component
-
-// Defining the PhotoListItem component as a functional component
 const PhotoListItem = (props) => {
+  const { id, imageSource, username, userCity, userCountry, photoFavourites, selectFavourite, userProfile, onClick } = props;
 
-  const { id, imageSource, username, userCity, userCountry, photoFavourites, selectFavourite, userProfile, onClick } = props; // Destructuring the props object
-
-  // Define the handleClick function to handle the click event on the photo item
   const handleClick = (event) => {
     onClick(event);
   };
 
+  const isFavPhoto = photoFavourites[id] || false;
+
   return (
     <div className="photo-list--item" onClick={handleClick}>
-      <PhotoFavButton
-        id={id}
-        photoFavourites={photoFavourites}
-        selectFavourite={selectFavourite}
-      />
+      <PhotoFavButton id={id} photoFavourites={photoFavourites} selectFavourite={selectFavourite} />
+      {isFavPhoto && <FavBadge isFavPhotoExist={isFavPhoto} />} {/* Display the FavBadge if the photo is marked as favorite */}
       <div className="photo-list--image-container">
-        <img className="photo-list--image" src={imageSource} />
+        <img className="photo-list--image" src={imageSource} alt="Photo" />
         <div className="photo-list--user-details">
-          <img className="photo-list--user-profile" src={userProfile} />
+          <img className="photo-list--user-profile" src={userProfile} alt="User Profile" />
           <div className="photo-list--user-info">
             {username}
             <div className="photo-list--user-location">
@@ -36,6 +31,5 @@ const PhotoListItem = (props) => {
     </div>
   );
 };
-
 
 export default PhotoListItem;

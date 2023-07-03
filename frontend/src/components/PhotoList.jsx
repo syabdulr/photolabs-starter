@@ -2,22 +2,14 @@ import React from 'react';
 import PhotoListItem from './PhotoListItem';
 import '../styles/PhotoList.scss';
 
-
 const PhotoList = (props) => {
+
   const { photos, topics, openModal, photoFavourites, selectFavourite } = props;
 
-  /**
-   * Handle the click event when a photo is clicked.
-   * @param {object} photo - The clicked photo object.
-   */
   const handleClick = (photo) => {
     openModal(photo);
   };
 
-  /**
-   * Map the photos array to PhotoListItem components.
-   * @returns {Array<JSX.Element>} - An array of PhotoListItem components.
-   */
   const mappedPhotos = photos.map((photo) => {
     return (
       <PhotoListItem
@@ -40,7 +32,7 @@ const PhotoList = (props) => {
 
   return (
     <ul className="photo-list">
-      {photos.length === 0 && <h2>Please wait while we load your photos</h2>}
+      {photos.length === 0 && <h2>No photos available</h2>}
       {mappedPhotos}
     </ul>
   );
